@@ -1,0 +1,122 @@
+
+body {
+    background-color: #85D8CF;
+}
+
+table {
+    
+    padding: 7px;
+    border: 1px solid black;
+    width: 50%;
+    height: 100%;
+    color: #EDEDED;
+}
+
+input[readonly] {
+    
+    background-color: gray;
+    
+}
+
+.wrap {
+
+text-align: center;
+width: 90%;
+margin: 0 auto;
+border: 1px solid black;
+margin-top: 25px;
+
+
+}
+
+/* header */
+
+.header {
+
+text-align: left;
+padding: 25px;
+
+}
+
+.headerImg {
+
+float: left;
+width: 200px;
+
+}
+
+.headerText {
+
+float: left;
+height: 105px;
+padding-top: 50px;
+padding-left: 25px;
+
+
+
+}
+
+
+
+.navcontainer { 
+    
+    
+    margin-left: 30px; 
+
+    text-align: left;
+ }
+
+/*Fat Erik's Pipelist*/
+.navlist
+{
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.navlist li
+{
+display: inline;
+padding: 0;
+margin: 0;
+}
+
+.navlist li:before { content: "| "; }
+.navlist li:first-child:before { content: ""; }
+
+/*IE workaround*/
+/*All IE browsers*/
+* html #navlist li
+{
+border-left: 1px solid black;
+padding: 0 0.4em 0 0.4em;
+margin: 0 0.4em 0 -0.4em;
+}
+
+/*Win IE browsers - hide from Mac IE\*/
+* html #navlist { height: 1%; }
+
+* html #navlist li
+{
+display: block;
+float: left;
+}
+
+/*End hide*/
+/*Mac IE 5*/
+* html #navlist li:first-child { border-left: 0; }
+
+
+.main {
+
+text-align: left;
+padding: 25px;
+
+}
+
+.footer {
+
+text-align: left;
+padding: 25px;
+
+}
