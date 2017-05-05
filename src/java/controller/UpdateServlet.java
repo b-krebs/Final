@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dbHelpers.AddQuery;
+import dbHelpers.UpdateQuery;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,10 +18,10 @@ import model.Customers;
 
 /**
  *
- * @author baileykrebs
+ * @author Jake
  */
-@WebServlet(name = "AddServlet", urlPatterns = {"/addCustomer"})
-public class AddServlet extends HttpServlet {
+@WebServlet(name = "UpdateServlet", urlPatterns = {"/updateCustomer"})
+public class UpdateServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class AddServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddServlet</title>");            
+            out.println("<title>Servlet UpdateServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,10 +61,7 @@ public class AddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //pass execution to doPOst
-            doPost(request,response);
-        
+        doPost(request, response);
     }
 
     /**
@@ -100,23 +97,15 @@ public class AddServlet extends HttpServlet {
         customer.setZip(zip);
         customer.setEmailAddr(emailAddr);
         
-        //set up addQuery object
+        //create an UpdateQuery object and use it to update the customer
+        UpdateQuery uq = new UpdateQuery();
+        uq.doUpdate(customer);
         
-        AddQuery aq= new AddQuery();
-        
-        //pass the customer to addQuery to add to database
-        
-        aq.doAdd(customer);
-        
-        //pass execution control to the ReadServlet
-        String url="/read";
+        //pass control to the ReadServlet
+        String url = "/read";
         
         RequestDispatcher dispatcher = request.getRequestDispatcher(url);
         dispatcher.forward(request,response);
-        
-        
-        
-        
     }
 
     /**

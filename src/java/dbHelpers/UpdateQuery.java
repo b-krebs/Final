@@ -16,28 +16,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Customers;
 
-
 /**
  *
  * @author baileykrebs
  */
-public class AddQuery {
+public class UpdateQuery {
     
     private Connection conn;
     
-    public AddQuery(){
-        
-        Properties propa= new Properties();
+    public UpdateQuery() {
+    
+    Properties propa= new Properties();
        InputStream instr=getClass().getResourceAsStream("dbConn.properties");
         try {
             propa.load(instr);
         } catch (IOException ex) {
-            Logger.getLogger(AddQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             instr.close();
         } catch (IOException ex) {
-            Logger.getLogger(AddQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
        
        String driver= propa.getProperty("driver.name");
@@ -47,26 +46,27 @@ public class AddQuery {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AddQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             conn = DriverManager.getConnection(url, username, passwd);
         } catch (SQLException ex) {
-            Logger.getLogger(AddQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-    }
     
     
-    public void doAdd(Customers customer){
+}
+    
+    
+    public void doUpdate(Customers customer){
         
         try {
-            String query = "INSERT INTO Customers (firstName, lastName, addr1, addr2, city, custState, zip, emailAddr) Values(?, ?, ?, ?, ?, ?, ?, ?)";
+            String query="UPDATE customers SET firstName= ?, lastName= ?, addr1= ?, addr2= ?, city= ?, custState= ?, zip= ?, emailAddr= ?"
+                    + "WHERE custID= ?";
             
-            PreparedStatement ps= conn.prepareStatement(query);
+            PreparedStatement ps=conn.prepareStatement(query);
             
-            ps.setString(1, customer.getFirstName());
+             ps.setString(1, customer.getFirstName());
             ps.setString(2, customer.getLastName());
             ps.setString(3, customer.getAddr1());
             ps.setString(4, customer.getAddr2());
@@ -74,13 +74,16 @@ public class AddQuery {
             ps.setString(6, customer.getCustState());
             ps.setInt(7, customer.getZip());
             ps.setString(8, customer.getEmailAddr());
+            ps.setInt(9, customer.getCustID());
             
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(AddQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
     
     
 }
+
+

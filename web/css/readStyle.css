@@ -1,13 +1,13 @@
 
 body {
-    background-color: #85D8CF;
+    background-color: #EDEDED;
 }
 
 table {
     width: 100%;
     height: 100%;
-    background-color: #F08080;
-    color: #FFFFFF;
+    background-color: #c1ece9;
+    color: black;
 }
 
 tr:hover {
@@ -17,8 +17,8 @@ tr:hover {
 }
 
 tr:nth-child(odd) {
-    background-color: #EDEDED;
-    color: #696969;
+    background-color: #91D2CD;
+    color: black;
 }
 
 
@@ -29,15 +29,15 @@ td {
 
 #topRow {
     text-align: center;
-    background-color: #FFFF99;
-    color: #696969;
+    background-color: #A5A5A5;
+    color: black;
 }
 
 table, th, td{
     
     text-align: center;
     padding: 5px;
-    border: 1px solid #FFFFF;
+    border: none;
     border-collapse: collapse;
 
 }
@@ -52,7 +52,7 @@ th, td {
 text-align: center;
 width: 90%;
 margin: 0 auto;
-border: 1px solid black;
+border: none;
 margin-top: 25px;
 
 

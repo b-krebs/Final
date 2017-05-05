@@ -20,7 +20,7 @@
             
             <!--Menu-->
             
-            <%@ include file="includes/menu.jsp" %>
+            <%@ include file="includes/normalMenu.jsp" %>
      
         <div class="main">
         
@@ -68,13 +68,13 @@
                     
                     <tr>
                         <td>Email:</td>
-                        <td><input type="text" name="email" value="" size="50"></td>
+                        <td><input type="text" name="emailAddr" value="" size="50"></td>
                     </tr>
                     
                 </tbody>
             </table>
             
-            <br><br>
+            <br>
             
             <input type="reset" value="Clear" id="clear">
                     <input type="submit" value="Add" id="add">
@@ -82,6 +82,8 @@
             
         </form>
         
+        <br><br>
+        <%@ include file="includes/search.jsp" %>
      
          </div><!--end main--> 
         

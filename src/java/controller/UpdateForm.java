@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dbHelpers.AddQuery;
+import dbHelpers.ReadRecord;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,10 +18,10 @@ import model.Customers;
 
 /**
  *
- * @author baileykrebs
+ * @author Jake
  */
-@WebServlet(name = "AddServlet", urlPatterns = {"/addCustomer"})
-public class AddServlet extends HttpServlet {
+@WebServlet(name = "UpdateForm", urlPatterns = {"/update"})
+public class UpdateForm extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class AddServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddServlet</title>");            
+            out.println("<title>Servlet UpdateForm</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateForm at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,10 +61,7 @@ public class AddServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //pass execution to doPOst
-            doPost(request,response);
-        
+        doPost(request, response);
     }
 
     /**
@@ -79,44 +76,19 @@ public class AddServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //get data
-        String firstName= request.getParameter("firstName");
-        String lastName= request.getParameter("lastName");
-        String addr1= request.getParameter("addr1");
-        String addr2= request.getParameter("addr2");
-        String city= request.getParameter("city");
-        String custState= request.getParameter("custState");
-        int zip= Integer.parseInt(request.getParameter("zip"));
-        String emailAddr= request.getParameter("emailAddr");
-        
-        //set up a customer object
-        Customers customer= new Customers();
-        customer.setFirstName(firstName);
-        customer.setLastName(lastName);
-        customer.setAddr1(addr1);
-        customer.setAddr2(addr2);
-        customer.setCity(city);
-        customer.setCustState(custState);
-        customer.setZip(zip);
-        customer.setEmailAddr(emailAddr);
-        
-        //set up addQuery object
-        
-        AddQuery aq= new AddQuery();
-        
-        //pass the customer to addQuery to add to database
-        
-        aq.doAdd(customer);
-        
-        //pass execution control to the ReadServlet
-        String url="/read";
+        //get the customerID
+        int custID = Integer.parseInt(request.getParameter("custID"));
+        //create a ReadRecord class
+        ReadRecord rr = new ReadRecord(custID);
+        //use ReadRecord to get the customer data
+        rr.doRead();
+        Customers customer = rr.getCustomer();
+        //pass customer and control to the update form
+        request.setAttribute("customer",customer);
+        String url = "/updateForm.jsp";
         
         RequestDispatcher dispatcher = request.getRequestDispatcher(url);
         dispatcher.forward(request,response);
-        
-        
-        
-        
     }
 
     /**

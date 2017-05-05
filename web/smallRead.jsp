@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,6 +34,7 @@
         
         <br><br>
         <%@ include file="includes/search.jsp" %>
+        
         </div><!--end main--> 
         
         <!--Footer-->

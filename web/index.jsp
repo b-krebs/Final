@@ -18,10 +18,12 @@
             
             <!--Menu-->
             
-            <%@ include file="includes/menu.jsp" %>
+            <%@ include file="includes/normalMenu.jsp" %>
      
         <div class="main">
         <h1>Customer Database</h1>
+        
+        <%@ include file="includes/search.jsp" %>
         
         
         </div><!--end main--> 

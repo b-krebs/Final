@@ -1,4 +1,5 @@
 
+
 package dbHelpers;
 
 import java.io.IOException;
@@ -13,24 +14,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Customers;
 
-public class ReadQuery {
+
+public class SmallReadQuery {
     
     private Connection conn;
     private ResultSet results;
     
-    public ReadQuery () {
+    public SmallReadQuery () {
         
        Properties propa= new Properties();
        InputStream instr=getClass().getResourceAsStream("dbConn.properties");
         try {
             propa.load(instr);
         } catch (IOException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SmallReadQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             instr.close();
         } catch (IOException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SmallReadQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
        
        String driver= propa.getProperty("driver.name");
@@ -40,12 +42,12 @@ public class ReadQuery {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SmallReadQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             conn = DriverManager.getConnection(url, username, passwd);
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SmallReadQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -53,12 +55,12 @@ public class ReadQuery {
     public void doRead(){
         
         try {
-            String query= "Select * FROM CUSTOMERS ORDER BY custID ASC";
+            String query= "SELECT * FROM Customers";
             
-            PreparedStatement ps= conn.prepareStatement(query);
-            this.results=ps.executeQuery();
+            PreparedStatement ps = conn.prepareStatement(query);
+            this.results = ps.executeQuery();
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SmallReadQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
@@ -108,10 +110,11 @@ public class ReadQuery {
                 table+="</th>";
                 
                 
-      
+                table+="<th>";
+                table+=" ";
+                table+="</th>";
                     
                table +="</tr>";
-            
          try {   
             while(this.results.next()){
                 
@@ -168,7 +171,12 @@ public class ReadQuery {
                     table += "<td>";
                         table += customer.getEmailAddr();  
                    table +="</td>";
-                       
+                   
+                   table+="<td>";
+                        table +="<a href=update?custID="+ customer.getCustID()+"> Update</a>" 
+                                + "<a href=delete?custID=" + customer.getCustID() + "> Delete </a>";
+                        
+                    table +="</td>";     
                     
                              
                 
@@ -177,11 +185,11 @@ public class ReadQuery {
             
             
         } catch (SQLException ex) {
-            Logger.getLogger(ReadQuery.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SmallReadQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
+        table += "</tbody>";
         table +="</table>";
-            return table;
+        return table;
         
     }
-    
 }

@@ -95,7 +95,7 @@ public class ReadRecord {
             customer.setCity(this.results.getString("city"));
             customer.setCustState(this.results.getString("custState"));
             customer.setZip(this.results.getInt("zip"));
-            customer.setEmailAddr(this.results.getString("EmailAddr"));
+            customer.setEmailAddr(this.results.getString("emailAddr"));
             
         } catch (SQLException ex) {
             Logger.getLogger(ReadRecord.class.getName()).log(Level.SEVERE, null, ex);

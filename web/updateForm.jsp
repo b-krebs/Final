@@ -23,7 +23,7 @@
             
             <!--Menu-->
             
-            <%@ include file="includes/menu.jsp" %>
+            <%@ include file="includes/normalMenu.jsp" %>
      
         <div class="main">
        
@@ -84,7 +84,7 @@
                 
                
         </table>
-                    <br><br>
+                    <br>
                     
                     <input type="reset" value="Clear" id="clear">
                     <input type="submit" value="Update" id="update">
@@ -92,7 +92,9 @@
         </form>
                     
                     
-                    
+                    <br><br>
+            
+                    <%@ include file="includes/search.jsp" %>
                     
           </div><!--end main--> 
         
